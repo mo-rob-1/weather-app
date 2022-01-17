@@ -1,6 +1,6 @@
-import { click } from "@testing-library/user-event/dist/click";
 import { useState, useEffect } from "react";
 import Forecast from "./Forecast";
+import moment from "moment";
 
 function SearchInput() {
   const api = {
@@ -12,6 +12,9 @@ function SearchInput() {
   const [weather, setWeather] = useState({});
   const [forecast, setForecast] = useState({});
   const [required, setRequired] = useState("");
+  const [london, setLondon] = useState({});
+
+  const [loading, setLoading] = useState(true);
 
   const nth = function (d) {
     if (d > 3 && d < 21) return "th";
@@ -26,6 +29,9 @@ function SearchInput() {
         return "th";
     }
   };
+
+  const timezone = weather.timezone;
+  const timezoneInMinutes = timezone / 60;
 
   const dateObj = new Date();
   const date = dateObj.getDate();
@@ -46,6 +52,16 @@ function SearchInput() {
   const year = dateObj.getFullYear();
 
   const dateString = date + nth(date) + " " + month + " " + year;
+
+  useEffect(() => {
+    fetch(`${api.base}weather?q=london&units=metric&APPID=${api.key}`)
+      .then((res) => res.json())
+      .then((result) => {
+        setLondon(result);
+        console.log(result);
+        setLoading(false);
+      });
+  }, []);
 
   const clicked = (e) => {
     e.preventDefault();
@@ -97,13 +113,41 @@ function SearchInput() {
       </div>
 
       {typeof weather.main != "undefined" ? (
-        <div className="searched-location-weather">
+        <div
+          className={
+            typeof weather.main != "undefined"
+              ? weather.weather[0].main === "Clear"
+                ? "App clear"
+                : "App" && weather.weather[0].main === "Clouds"
+                ? "App cloudy"
+                : "App" && weather.weather[0].main === "Snow"
+                ? "App snowy"
+                : "App" && weather.weather[0].main === "Rain"
+                ? "App rain"
+                : "App" && weather.weather[0].main === "Thunderstorm"
+                ? "App thunderstorm"
+                : "App" && weather.weather[0].main === "Drizzle"
+                ? "App drizzle"
+                : "App" && weather.weather[0].main === "Fog"
+                ? "App fog"
+                : "App" && weather.weather[0].main === "Mist"
+                ? "App mist"
+                : "App" && weather.weather[0].main === "Haze"
+                ? "App haze"
+                : "App"
+              : "App"
+          }
+        >
           <div>
             <h1>
               {weather.name}, {weather.sys.country}
             </h1>
             <p>Sunrise: {new Date(weather.sys.sunrise * 1000).toLocaleTimeString("en")}</p>
             <p>Sunset: {new Date(weather.sys.sunset * 1000).toLocaleTimeString("en")}</p>
+            <p>
+              {moment().utcOffset(timezoneInMinutes).format("h:mm A")} |{" "}
+              {moment().utcOffset(timezoneInMinutes).format("dddd Do MMMM YYYY")}
+            </p>
           </div>
           <div>
             <div>{Math.round(weather.main.temp)}°</div>
@@ -114,7 +158,25 @@ function SearchInput() {
         </div>
       ) : (
         <div className="searched-location-weather">
-          <h1>London</h1>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <div className="searched-location-weather">
+              <h1>
+                {london.name}, {london.sys.country}
+              </h1>
+              <h1>
+                {Math.round(london.main.temp)}
+                <sup>°C</sup>
+              </h1>
+              <h2>{london.weather[0].main}</h2>
+              <img src={`http://openweathermap.org/img/w/${london.weather[0].icon}.png`} alt={london.weather[0].main} />
+              <p>
+                {moment().utcOffset(timezoneInMinutes).format("h:mm A")} |{" "}
+                {moment().utcOffset(timezoneInMinutes).format("dddd Do MMMM YYYY")}
+              </p>
+            </div>
+          )}
         </div>
       )}
     </div>
