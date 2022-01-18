@@ -1,7 +1,7 @@
 function Header() {
   return (
     <div>
-      <h1>Weather</h1>
+      <h1>The Weather</h1>
     </div>
   );
 }

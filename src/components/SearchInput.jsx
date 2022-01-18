@@ -70,7 +70,6 @@ function SearchInput() {
       .then((result) => {
         setWeather(result);
         setQuery("");
-
         console.log(result);
       });
     fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${query}&units=metric&APPID=${api.key}`)
@@ -78,7 +77,6 @@ function SearchInput() {
       .then((result) => {
         setForecast(result);
         setQuery("");
-
         console.log(result);
       });
     if (query === "") {
@@ -111,12 +109,14 @@ function SearchInput() {
         <p className="field-required">{required}</p>
         {weather.cod === "404" ? <p className="field-required">Location Not Found</p> : ""}
       </div>
-
       {typeof weather.main != "undefined" ? (
         <div
           className={
             typeof weather.main != "undefined"
-              ? weather.weather[0].main === "Clear"
+              ? moment().utcOffset(timezoneInMinutes).format("H") > parseInt("0") &&
+                moment().utcOffset(timezoneInMinutes).format("H") < parseInt("6")
+                ? "App night"
+                : "App" && weather.weather[0].main === "Clear"
                 ? "App clear"
                 : "App" && weather.weather[0].main === "Clouds"
                 ? "App cloudy"
@@ -144,10 +144,9 @@ function SearchInput() {
             </h1>
             <p>Sunrise: {new Date(weather.sys.sunrise * 1000).toLocaleTimeString("en")}</p>
             <p>Sunset: {new Date(weather.sys.sunset * 1000).toLocaleTimeString("en")}</p>
-            <p>
-              {moment().utcOffset(timezoneInMinutes).format("h:mm A")} |{" "}
-              {moment().utcOffset(timezoneInMinutes).format("dddd Do MMMM YYYY")}
-            </p>
+            <p>{moment().utcOffset(timezoneInMinutes).format("h:mm A")}</p>
+            <p>{moment().utcOffset(timezoneInMinutes).format("H")}</p>
+            <p> {moment().utcOffset(timezoneInMinutes).format("dddd Do MMMM YYYY")}</p>
           </div>
           <div>
             <div>{Math.round(weather.main.temp)}°</div>
@@ -157,11 +156,35 @@ function SearchInput() {
           </div>
         </div>
       ) : (
-        <div className="searched-location-weather">
+        <div>
           {loading ? (
             <p>Loading...</p>
           ) : (
-            <div className="searched-location-weather">
+            <div
+              className={
+                typeof london.main != "undefined"
+                  ? london.weather[0].main === "Clear"
+                    ? "App clear"
+                    : "App" && london.weather[0].main === "Clouds"
+                    ? "App cloudy"
+                    : "App" && london.weather[0].main === "Snow"
+                    ? "App snowy"
+                    : "App" && london.weather[0].main === "Rain"
+                    ? "App rain"
+                    : "App" && london.weather[0].main === "Thunderstorm"
+                    ? "App thunderstorm"
+                    : "App" && london.weather[0].main === "Drizzle"
+                    ? "App drizzle"
+                    : "App" && london.weather[0].main === "Fog"
+                    ? "App fog"
+                    : "App" && london.weather[0].main === "Mist"
+                    ? "App mist"
+                    : "App" && london.weather[0].main === "Haze"
+                    ? "App haze"
+                    : "App"
+                  : "App"
+              }
+            >
               <h1>
                 {london.name}, {london.sys.country}
               </h1>

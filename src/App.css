@@ -23,9 +23,11 @@ body {
 }
 
 .App.clear {
-  background: blue;
+  background: rgb(41, 41, 233);
 }
-
+.App.night {
+  background: rgb(63, 63, 63) !important;
+}
 .App.cloudy {
   background: yellow;
 }
