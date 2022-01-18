@@ -113,7 +113,7 @@ function SearchInput() {
         <div
           className={
             typeof weather.main != "undefined"
-              ? moment().utcOffset(timezoneInMinutes).format("H") > parseInt("0") &&
+              ? moment().utcOffset(timezoneInMinutes).format("H") >= parseInt("0") &&
                 moment().utcOffset(timezoneInMinutes).format("H") < parseInt("6")
                 ? "App night"
                 : "App" && weather.weather[0].main === "Clear"
