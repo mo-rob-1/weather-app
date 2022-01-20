@@ -4,18 +4,41 @@ function Forecast({ forecast }) {
   return (
     <div>
       {typeof forecast.list != "undefined" ? (
-        <div className="searched-location-weather">
+        <div className="forecast-wrapper">
           <div>
-            <img src={`http://openweathermap.org/img/w/${forecast.list[6].weather[0].icon}.png`} />
-            {moment(forecast.list[6].dt_txt).format("dddd Do MMMM YYYY hh:mm a")}
-            <p>Min: {forecast.list[6].main.temp_min}</p>
-            <p>Max: {forecast.list[6].main.temp_max}</p>
+            {moment(forecast.list[6].dt_txt).format("ddd")}
+            <div>
+              <img src={`http://openweathermap.org/img/w/${forecast.list[6].weather[0].icon}.png`} />
+            </div>
+            <p>{Math.round(forecast.list[6].main.temp)}°</p>
           </div>
           <div>
-            <img src={`http://openweathermap.org/img/w/${forecast.list[6].weather[0].icon}.png`} />
-            {moment(forecast.list[6].dt_txt).format("dddd Do MMMM YYYY h:mm a")}
-            <p>Min: {forecast.list[6].main.temp_min}</p>
-            <p>Max: {forecast.list[6].main.temp_max}</p>
+            {moment(forecast.list[14].dt_txt).format("ddd")}
+            <div>
+              <img src={`http://openweathermap.org/img/w/${forecast.list[14].weather[0].icon}.png`} />
+            </div>
+            <p>{Math.round(forecast.list[14].main.temp)}°</p>
+          </div>
+          <div>
+            {moment(forecast.list[22].dt_txt).format("ddd")}
+            <div>
+              <img src={`http://openweathermap.org/img/w/${forecast.list[22].weather[0].icon}.png`} />
+            </div>
+            <p>{Math.round(forecast.list[22].main.temp)}°</p>
+          </div>
+          <div>
+            {moment(forecast.list[30].dt_txt).format("ddd")}
+            <div>
+              <img src={`http://openweathermap.org/img/w/${forecast.list[30].weather[0].icon}.png`} />
+            </div>
+            <p>{Math.round(forecast.list[30].main.temp)}°</p>
+          </div>
+          <div>
+            {moment(forecast.list[38].dt_txt).format("ddd")}
+            <div>
+              <img src={`http://openweathermap.org/img/w/${forecast.list[38].weather[0].icon}.png`} />
+            </div>
+            <p>{Math.round(forecast.list[38].main.temp)}°</p>
           </div>
         </div>
       ) : (

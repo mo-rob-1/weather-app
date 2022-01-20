@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 .field-required {
   color: red;
@@ -20,35 +20,113 @@ body {
 
 .App {
   background: red;
+  position: relative;
+  padding: 1rem;
 }
 
 .App.clear {
-  background: rgb(41, 41, 233);
+  background-image: url("/src/assets/images/clear-blue-sky.jpg");
+  background-color: rgb(63, 63, 63) !important;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .App.night {
-  background: rgb(63, 63, 63) !important;
+  background-image: url("/src/assets/images/night.jpg");
+  background-color: rgb(63, 63, 63) !important;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .App.cloudy {
-  background: yellow;
+  background-image: url("/src/assets/images/clouds.jpg");
+  background-color: rgb(63, 63, 63) !important;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .App.snowy {
-  background: green;
+  background-image: url("/src/assets/images/snow.jpg");
+  background-color: rgb(63, 63, 63) !important;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .App.rain {
-  background: orange;
+  background-image: url("/src/assets/images/rain.jpg");
+  background-color: rgb(63, 63, 63) !important;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .App.thunderstorm {
   background: purple;
+  background-image: url("/src/assets/images/thunder.jpg");
+  background-color: rgb(63, 63, 63) !important;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .App.drizzle {
   background: brown;
 }
 .App.fog {
-  background: grey;
+  background-image: url("/src/assets/images/fog.jpg");
+  background-color: rgb(63, 63, 63) !important;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .App.mist {
   background: rgb(86, 183, 190);
 }
 .App.haze {
   background: rgb(155, 211, 144);
+}
+
+.search-wrapper {
+  background-color: #222;
+  padding: 1rem;
+}
+.input-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.weather-info {
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 1rem;
+}
+.temp {
+  font-size: 8rem;
+  font-weight: 400;
+}
+.location {
+  font-weight: 300;
+  margin-right: 0.5rem;
+}
+.col-two {
+  display: flex;
+}
+.forecast-wrapper {
+  margin-top: 2rem;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  gap: 2rem;
+}
+@media screen and (min-width: 550px) {
+  .forecast-wrapper {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }
