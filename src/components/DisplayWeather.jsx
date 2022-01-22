@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Forecast from "./Forecast";
+import WeatherDetails from "./WeatherDetails";
 import moment from "moment";
 import { FaSearch } from "react-icons/fa";
 
@@ -13,7 +14,7 @@ function DisplayWeather() {
   const [weather, setWeather] = useState({});
   const [forecast, setForecast] = useState({});
   const [required, setRequired] = useState("");
-  const [london, setLondon] = useState({});
+  const [defaultLocation, setDefaultLocation] = useState({});
 
   const [loading, setLoading] = useState(true);
 
@@ -58,7 +59,7 @@ function DisplayWeather() {
     fetch(`${api.base}weather?q=london&units=metric&APPID=${api.key}`)
       .then((res) => res.json())
       .then((result) => {
-        setLondon(result);
+        setDefaultLocation(result);
         console.log(result);
         setLoading(false);
       });
@@ -94,7 +95,7 @@ function DisplayWeather() {
   }
 
   return (
-    <div>
+    <div className="container">
       {/* <div className="date">{dateString}</div>
       <div className="search-wrapper">
         <div className="input-wrapper">
@@ -112,7 +113,6 @@ function DisplayWeather() {
         <p className="field-required">{required}</p>
         {weather.cod === "404" ? <p className="field-required">Location Not Found</p> : ""}
       </div> */}
-
       {typeof weather.main != "undefined" ? (
         <div
           className={
@@ -204,28 +204,28 @@ function DisplayWeather() {
           ) : (
             <div
               className={
-                typeof london.main != "undefined"
+                typeof defaultLocation.main != "undefined"
                   ? moment().utcOffset(timezoneInMinutes).format("H") >= 20
                     ? "App night"
                     : "App" && moment().utcOffset(timezoneInMinutes).format("H") < 8
                     ? "App night"
-                    : "App" && london.weather[0].main === "Clear"
+                    : "App" && defaultLocation.weather[0].main === "Clear"
                     ? "App clear"
-                    : "App" && london.weather[0].main === "Clouds"
+                    : "App" && defaultLocation.weather[0].main === "Clouds"
                     ? "App cloudy"
-                    : "App" && london.weather[0].main === "Snow"
+                    : "App" && defaultLocation.weather[0].main === "Snow"
                     ? "App snowy"
-                    : "App" && london.weather[0].main === "Rain"
+                    : "App" && defaultLocation.weather[0].main === "Rain"
                     ? "App rain"
-                    : "App" && london.weather[0].main === "Thunderstorm"
+                    : "App" && defaultLocation.weather[0].main === "Thunderstorm"
                     ? "App thunderstorm"
-                    : "App" && london.weather[0].main === "Drizzle"
+                    : "App" && defaultLocation.weather[0].main === "Drizzle"
                     ? "App drizzle"
-                    : "App" && london.weather[0].main === "Fog"
+                    : "App" && defaultLocation.weather[0].main === "Fog"
                     ? "App fog"
-                    : "App" && london.weather[0].main === "Mist"
+                    : "App" && defaultLocation.weather[0].main === "Mist"
                     ? "App mist"
-                    : "App" && london.weather[0].main === "Haze"
+                    : "App" && defaultLocation.weather[0].main === "Haze"
                     ? "App haze"
                     : "App"
                   : "App"
@@ -243,7 +243,7 @@ function DisplayWeather() {
               </button>
               <p className="field-required">{required}</p>
               {weather.cod === "404" ? <p className="field-required">Location Not Found</p> : ""}
-              <h1>
+              {/* <h1>
                 {london.name}, {london.sys.country}
               </h1>
               <h1>
@@ -255,11 +255,90 @@ function DisplayWeather() {
               <p>
                 {moment().utcOffset(timezoneInMinutes).format("h:mm A")} |{" "}
                 {moment().utcOffset(timezoneInMinutes).format("dddd Do MMMM YYYY")}
-              </p>
+              </p> */}
+              <div className="weather-info">
+                <h1 className="temp">{Math.round(defaultLocation.main.temp)}°</h1>
+
+                <div className="col-two">
+                  <h1 className="location">
+                    {defaultLocation.name}, {defaultLocation.sys.country}
+                  </h1>
+
+                  <div>
+                    <img
+                      src={`http://openweathermap.org/img/w/${defaultLocation.weather[0].icon}.png`}
+                      alt={defaultLocation.weather[0].main}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <p>
+                    {defaultLocation.weather[0].main} | {moment().utcOffset(timezoneInMinutes).format("h:mm A")}
+                  </p>
+                </div>
+
+                <p>{moment().utcOffset(timezoneInMinutes).format("dddd Do MMMM YYYY")}</p>
+
+                {/* <p>
+              Sunrise:{" "}
+              {moment(weather.sys.sunrise * 1000)
+                .utcOffset(timezoneInMinutes)
+                .format("h:mm A")}
+            </p>
+
+            <p>
+              Sunset:{" "}
+              {moment(weather.sys.sunset * 1000)
+                .utcOffset(timezoneInMinutes)
+                .format("h:mm A")}
+            </p> */}
+
+                {/* <Forecast forecast={forecast} /> */}
+
+                {/* <div className="forecast-wrapper">
+                  <div>
+                    <p>{moment(london.list[6].dt_txt).format("ddd")}</p>
+                    <div>
+                      <img src={`http://openweathermap.org/img/w/${london.list[6].weather[0].icon}.png`} />
+                    </div>
+                    <p>{Math.round(london.list[6].main.temp)}°</p>
+                  </div>
+                  <div>
+                    <p>{moment(london.list[14].dt_txt).format("ddd")}</p>
+                    <div>
+                      <img src={`http://openweathermap.org/img/w/${london.list[14].weather[0].icon}.png`} />
+                    </div>
+                    <p>{Math.round(london.list[14].main.temp)}°</p>
+                  </div>
+                  <div>
+                    <p>{moment(london.list[22].dt_txt).format("ddd")}</p>
+                    <div>
+                      <img src={`http://openweathermap.org/img/w/${london.list[22].weather[0].icon}.png`} />
+                    </div>
+                    <p>{Math.round(london.list[22].main.temp)}°</p>
+                  </div>
+                  <div>
+                    <p>{moment(london.list[30].dt_txt).format("ddd")}</p>
+                    <div>
+                      <img src={`http://openweathermap.org/img/w/${london.list[30].weather[0].icon}.png`} />
+                    </div>
+                    <p>{Math.round(london.list[30].main.temp)}°</p>
+                  </div>
+                  <div>
+                    <p>{moment(london.list[38].dt_txt).format("ddd")}</p>
+                    <div>
+                      <img src={`http://openweathermap.org/img/w/${london.list[38].weather[0].icon}.png`} />
+                    </div>
+                    <p>{Math.round(london.list[38].main.temp)}°</p>
+                  </div>
+                </div> */}
+              </div>
             </div>
           )}
         </div>
       )}
+      <WeatherDetails weather={weather} defaultLocation={defaultLocation} />
     </div>
   );
 }
