@@ -4,7 +4,7 @@ function WeatherDetails({ weather, defaultLocation }) {
   const timezone = weather.timezone;
   const timezoneInMinutes = timezone / 60;
   return (
-    <div className="weather-details">
+    <div>
       {typeof weather.main != "undefined" ? (
         <div>
           <h2 className="weather-details-title">Weather Details</h2>
