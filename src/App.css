@@ -19,7 +19,12 @@ body {
 }
 
 .App {
-  background: red;
+  background-image: url("/src/assets/images/clouds.jpg");
+  background-color: rgb(63, 63, 63) !important;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   position: relative;
   padding: 1rem;
 }
@@ -56,7 +61,8 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
-.App.rain {
+.App.rain,
+.App.drizzle {
   background-image: url("/src/assets/images/rain.jpg");
   background-color: rgb(63, 63, 63) !important;
   height: 100vh;
@@ -65,16 +71,12 @@ body {
   background-size: cover;
 }
 .App.thunderstorm {
-  background: purple;
-  background-image: url("/src/assets/images/thunder.jpg");
+  background-image: url("/src/assets/images/thunderstorm.jpeg");
   background-color: rgb(63, 63, 63) !important;
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
-.App.drizzle {
-  background: brown;
 }
 .App.fog {
   background-image: url("/src/assets/images/fog.jpg");
@@ -85,12 +87,21 @@ body {
   background-size: cover;
 }
 .App.mist {
-  background: rgb(86, 183, 190);
+  background-image: url("/src/assets/images/mist.jpg");
+  background-color: rgb(63, 63, 63) !important;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .App.haze {
-  background: rgb(155, 211, 144);
+  background-image: url("/src/assets/images/haze.jpg");
+  background-color: rgb(63, 63, 63) !important;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-
 .search-wrapper {
   background-color: #222;
   padding: 1rem;
@@ -139,6 +150,14 @@ body {
   display: grid;
   gap: 1.8rem;
 }
+.daily-forecast-wrapper {
+  text-align: center;
+  margin-top: 4rem;
+}
+.forecast-day {
+  margin-top: 0.6rem;
+}
+
 @media screen and (min-width: 550px) {
   .forecast-wrapper {
     grid-template-columns: repeat(5, 1fr);
@@ -149,5 +168,22 @@ body {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .weather-details {
+    padding: 4rem;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .daily-forecast-wrapper {
+    display: flex;
+    justify-content: space-around;
+  }
+  .daily-forecast-item {
+    margin-right: 2rem;
+  }
+  .daily-forecast-item:nth-child(9) {
+    margin-right: 0;
   }
 }
