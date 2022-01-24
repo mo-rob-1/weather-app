@@ -3,7 +3,6 @@
   margin: 0;
   padding: 0;
 }
-
 body {
   font-family: "Outfit", sans-serif;
 }
@@ -17,7 +16,6 @@ body {
   padding: 2rem;
   text-align: center;
 }
-
 .App {
   background-image: url("/src/assets/images/clouds.jpg");
   background-color: rgb(63, 63, 63) !important;
@@ -154,10 +152,29 @@ body {
   text-align: center;
   margin-top: 4rem;
 }
+.swiper-btn-wrapper {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  bottom: 5rem;
+}
 .forecast-day {
   margin-top: 0.6rem;
 }
-
+.slide___3-Nqo {
+  width: 6% !important;
+}
+.carousel__slider {
+  height: 140px;
+}
+.carousel__next-button,
+.carousel__back-button {
+  background: none;
+  border: none;
+}
+.chevron-icon {
+  color: #fff;
+}
 @media screen and (min-width: 550px) {
   .forecast-wrapper {
     grid-template-columns: repeat(5, 1fr);
@@ -169,21 +186,23 @@ body {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
   }
+  .slide___3-Nqo {
+    width: 4% !important;
+  }
 }
 @media screen and (min-width: 1024px) {
   .weather-details {
     padding: 4rem;
   }
+  .slide___3-Nqo {
+    width: 5% !important;
+  }
 }
 @media screen and (min-width: 1440px) {
-  .daily-forecast-wrapper {
-    display: flex;
-    justify-content: space-around;
+  .slide___3-Nqo {
+    width: 94px !important;
   }
-  .daily-forecast-item {
-    margin-right: 2rem;
-  }
-  .daily-forecast-item:nth-child(9) {
-    margin-right: 0;
+  .swiper-btn-wrapper {
+    display: none;
   }
 }

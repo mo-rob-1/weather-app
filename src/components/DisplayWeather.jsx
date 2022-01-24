@@ -69,7 +69,7 @@ function DisplayWeather() {
   }, []);
 
   useEffect(() => {
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=london&units=metric&APPID=${api.key}`)
+    fetch(`${api.base}forecast?q=london&units=metric&APPID=${api.key}`)
       .then((res) => res.json())
       .then((result) => {
         setDefaultLocationForecast(result);
@@ -86,7 +86,7 @@ function DisplayWeather() {
         setQuery("");
         console.log(result);
       });
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${query}&units=metric&APPID=${api.key}`)
+    fetch(`${api.base}forecast?q=${query}&units=metric&APPID=${api.key}`)
       .then((res) => res.json())
       .then((result) => {
         setForecast(result);
@@ -291,7 +291,11 @@ function DisplayWeather() {
         </div>
       )}
       <div className="weather-details">
-        <WeatherDetails weather={weather} defaultLocation={defaultLocation} />
+        <WeatherDetails
+          weather={weather}
+          defaultLocation={defaultLocation}
+          defaultLocationForecast={defaultLocationForecast}
+        />
         <div>{typeof forecast.list != "undefined" ? <DailyForecast forecast={forecast} /> : ""}</div>
       </div>
     </div>
