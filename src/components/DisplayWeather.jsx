@@ -7,10 +7,6 @@ import moment from "moment";
 import { FaSearch } from "react-icons/fa";
 
 function DisplayWeather() {
-  const api = {
-    base: "https://api.openweathermap.org/data/2.5/",
-  };
-
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState({});
   const [forecast, setForecast] = useState({});
@@ -24,7 +20,9 @@ function DisplayWeather() {
   const timezoneInMinutes = timezone / 60;
 
   useEffect(() => {
-    fetch(`${api.base}weather?q=london&units=metric&APPID=92ad1b8fac49021cb4c59e5896d7a138`)
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=london&units=metric&APPID=92ad1b8fac49021cb4c59e5896d7a138`
+    )
       .then((res) => res.json())
       .then((result) => {
         setDefaultLocation(result);
@@ -34,7 +32,9 @@ function DisplayWeather() {
   }, []);
 
   useEffect(() => {
-    fetch(`${api.base}forecast?q=london&units=metric&APPID=92ad1b8fac49021cb4c59e5896d7a138`)
+    fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?q=london&units=metric&APPID=92ad1b8fac49021cb4c59e5896d7a138`
+    )
       .then((res) => res.json())
       .then((result) => {
         setDefaultLocationForecast(result);
@@ -44,14 +44,18 @@ function DisplayWeather() {
 
   const clicked = (e) => {
     e.preventDefault();
-    fetch(`${api.base}weather?q=${query}&units=metric&APPID=92ad1b8fac49021cb4c59e5896d7a138`)
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&APPID=92ad1b8fac49021cb4c59e5896d7a138`
+    )
       .then((res) => res.json())
       .then((result) => {
         setWeather(result);
         setQuery("");
         console.log(result);
       });
-    fetch(`${api.base}forecast?q=${query}&units=metric&APPID=92ad1b8fac49021cb4c59e5896d7a138`)
+    fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?q=${query}&units=metric&APPID=92ad1b8fac49021cb4c59e5896d7a138`
+    )
       .then((res) => res.json())
       .then((result) => {
         setForecast(result);
