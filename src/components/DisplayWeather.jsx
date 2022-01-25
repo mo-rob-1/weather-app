@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import Forecast from "./Forecast";
+import WeeklyForecast from "./WeeklyForecast";
 import WeatherDetails from "./WeatherDetails";
 import DefaultLocationForecast from "./DefaultLocationForecast";
-import DailyForecast from "./DailyForecast";
+import Footer from "./Footer";
 import moment from "moment";
 import { FaSearch } from "react-icons/fa";
 
@@ -21,42 +21,8 @@ function DisplayWeather() {
 
   const [loading, setLoading] = useState(true);
 
-  const nth = function (d) {
-    if (d > 3 && d < 21) return "th";
-    switch (d % 10) {
-      case 1:
-        return "st";
-      case 2:
-        return "nd";
-      case 3:
-        return "rd";
-      default:
-        return "th";
-    }
-  };
-
   const timezone = weather.timezone;
   const timezoneInMinutes = timezone / 60;
-
-  const dateObj = new Date();
-  const date = dateObj.getDate();
-  const month = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ][dateObj.getMonth()];
-  const year = dateObj.getFullYear();
-
-  const dateString = date + nth(date) + " " + month + " " + year;
 
   useEffect(() => {
     fetch(`${api.base}weather?q=london&units=metric&APPID=${api.key}`)
@@ -108,23 +74,6 @@ function DisplayWeather() {
 
   return (
     <div className="container">
-      {/* <div className="date">{dateString}</div>
-      <div className="search-wrapper">
-        <div className="input-wrapper">
-          <input
-            type="text"
-            placeholder="Enter a Location"
-            onChange={(e) => setQuery(e.target.value)}
-            value={query}
-            onKeyPress={handleKeyPress}
-          />
-          <button type="submit" onClick={clicked}>
-            <FaSearch />
-          </button>
-        </div>
-        <p className="field-required">{required}</p>
-        {weather.cod === "404" ? <p className="field-required">Location Not Found</p> : ""}
-      </div> */}
       {typeof weather.main != "undefined" ? (
         <div
           className={
@@ -155,16 +104,18 @@ function DisplayWeather() {
               : "App"
           }
         >
-          <input
-            type="text"
-            placeholder="Enter a Location"
-            onChange={(e) => setQuery(e.target.value)}
-            value={query}
-            onKeyPress={handleKeyPress}
-          />
-          <button type="submit" onClick={clicked}>
-            <FaSearch />
-          </button>
+          <div className="input-wrapper">
+            <input
+              type="text"
+              placeholder="Enter a Location"
+              onChange={(e) => setQuery(e.target.value)}
+              value={query}
+              onKeyPress={handleKeyPress}
+            />
+            <button className="search-btn" type="submit" onClick={clicked}>
+              <FaSearch />
+            </button>
+          </div>
           <p className="field-required">{required}</p>
           {weather.cod === "404" ? <p className="field-required">Location Not Found</p> : ""}
 
@@ -192,21 +143,7 @@ function DisplayWeather() {
 
             <p>{moment().utcOffset(timezoneInMinutes).format("dddd Do MMMM YYYY")}</p>
 
-            {/* <p>
-              Sunrise:{" "}
-              {moment(weather.sys.sunrise * 1000)
-                .utcOffset(timezoneInMinutes)
-                .format("h:mm A")}
-            </p>
-
-            <p>
-              Sunset:{" "}
-              {moment(weather.sys.sunset * 1000)
-                .utcOffset(timezoneInMinutes)
-                .format("h:mm A")}
-            </p> */}
-
-            <Forecast forecast={forecast} />
+            <WeeklyForecast forecast={forecast} />
           </div>
         </div>
       ) : (
@@ -243,16 +180,18 @@ function DisplayWeather() {
                   : "App"
               }
             >
-              <input
-                type="text"
-                placeholder="Enter a Location"
-                onChange={(e) => setQuery(e.target.value)}
-                value={query}
-                onKeyPress={handleKeyPress}
-              />
-              <button type="submit" onClick={clicked}>
-                <FaSearch />
-              </button>
+              <div className="input-wrapper">
+                <input
+                  type="text"
+                  placeholder="Enter a Location"
+                  onChange={(e) => setQuery(e.target.value)}
+                  value={query}
+                  onKeyPress={handleKeyPress}
+                />
+                <button className="search-btn" type="submit" onClick={clicked}>
+                  <FaSearch />
+                </button>
+              </div>
               <p className="field-required">{required}</p>
               {weather.cod === "404" ? <p className="field-required">Location Not Found</p> : ""}
 
@@ -295,8 +234,9 @@ function DisplayWeather() {
           weather={weather}
           defaultLocation={defaultLocation}
           defaultLocationForecast={defaultLocationForecast}
+          forecast={forecast}
         />
-        <div>{typeof forecast.list != "undefined" ? <DailyForecast forecast={forecast} /> : ""}</div>
+        <Footer />
       </div>
     </div>
   );
