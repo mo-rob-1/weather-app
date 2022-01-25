@@ -3,12 +3,36 @@
   margin: 0;
   padding: 0;
 }
+a {
+  color: #fff;
+}
 body {
   font-family: "Outfit", sans-serif;
 }
+input::placeholder {
+  font-family: "Outfit", sans-serif;
+}
+input {
+  font-family: "Outfit", sans-serif;
+  height: 40px;
+  padding-left: 0.5rem;
+  border: none;
+  width: 100%;
+}
+.search-btn {
+  background-color: #222;
+  color: #fff;
+  border: none;
+  height: 40px;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+  cursor: pointer;
+}
 .field-required {
-  color: red;
+  color: #fff;
   font-weight: bold;
+  text-align: center;
+  margin-top: 0.4rem;
 }
 .searched-location-weather {
   background-color: #ab6e6e;
@@ -26,7 +50,6 @@ body {
   position: relative;
   padding: 1rem;
 }
-
 .App.clear {
   background-image: url("/src/assets/images/clear-blue-sky.jpg");
   background-color: rgb(63, 63, 63) !important;
@@ -108,6 +131,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 2rem;
 }
 .weather-info {
   color: #fff;
@@ -135,6 +159,7 @@ body {
   gap: 2rem;
 }
 .weather-details {
+  position: relative;
   padding: 2rem;
   background-color: #222;
   color: #fff;
@@ -145,6 +170,7 @@ body {
 }
 .details-container {
   margin-top: 3rem;
+  margin-bottom: 4rem;
   display: grid;
   gap: 1.8rem;
 }
@@ -175,6 +201,13 @@ body {
 .chevron-icon {
   color: #fff;
 }
+.footer {
+  position: absolute;
+  bottom: 0;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 @media screen and (min-width: 550px) {
   .forecast-wrapper {
     grid-template-columns: repeat(5, 1fr);
@@ -191,6 +224,9 @@ body {
   }
 }
 @media screen and (min-width: 1024px) {
+  input {
+    width: 40%;
+  }
   .weather-details {
     padding: 4rem;
   }
@@ -199,6 +235,9 @@ body {
   }
 }
 @media screen and (min-width: 1440px) {
+  input {
+    width: 30%;
+  }
   .slide___3-Nqo {
     width: 94px !important;
   }
