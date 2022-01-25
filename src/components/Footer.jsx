@@ -1,7 +1,9 @@
 function Footer() {
   return (
-    <div>
-      <small>© 2022 Weather App - All Rights Reserved</small>
+    <div className="footer">
+      <small>
+        Coded by <a href="https://mocodes.co.uk/">Mo.</a>
+      </small>
     </div>
   );
 }
