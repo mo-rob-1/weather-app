@@ -80,7 +80,7 @@ function DisplayWeather() {
             typeof weather.main != "undefined"
               ? moment().utcOffset(timezoneInMinutes).format("H") >= 20
                 ? "App night"
-                : "App" && moment().utcOffset(timezoneInMinutes).format("H") < 8
+                : "App" && moment().utcOffset(timezoneInMinutes).format("H") < 7
                 ? "App night"
                 : "App" && weather.weather[0].main === "Clear"
                 ? "App clear"
@@ -156,7 +156,7 @@ function DisplayWeather() {
                 typeof defaultLocation.main != "undefined"
                   ? moment().utcOffset(timezoneInMinutes).format("H") >= 20
                     ? "App night"
-                    : "App" && moment().utcOffset(timezoneInMinutes).format("H") < 8
+                    : "App" && moment().utcOffset(timezoneInMinutes).format("H") < 7
                     ? "App night"
                     : "App" && defaultLocation.weather[0].main === "Clear"
                     ? "App clear"
