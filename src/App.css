@@ -140,7 +140,7 @@ input {
   margin-bottom: 1rem;
 }
 .temp {
-  font-size: 8rem;
+  font-size: 6rem;
   font-weight: 400;
 }
 .location {
@@ -214,6 +214,9 @@ input {
   }
 }
 @media screen and (min-width: 768px) {
+  .temp {
+    font-size: 8rem;
+  }
   .container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
